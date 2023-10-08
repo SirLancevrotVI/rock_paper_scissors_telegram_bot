@@ -1,2 +1,3 @@
-# little_step
-little step for open source and a huge step for developer
+# Rock Paper Scissors Telegram Bot
+A simple telegram bot for singleplayer rock paper scissors game made with python. 
+It use pytelegrambotapi and random module.
