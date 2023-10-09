@@ -12,11 +12,13 @@ paper = "📄"
 user_choice = ''
 bot_choice = ''
 
+# randomize bot choice
 def get_bot_choice():
     choices = [rock, scissors, paper]
     bot_choice = random.choice(choices)
     return bot_choice
 
+# determine the winner
 def determine_winner(user_choice, bot_choice):
     if user_choice == bot_choice:
         return 'Ничья'
@@ -42,7 +44,7 @@ def send_welcome(message):
                      text=' Добро пожаловать в игру: "Камень, ножницы, бумага".\n\nВыберите соответствующую кнопку, чтобы сделать ход.'.format(
                          message.from_user), reply_markup=markup)
 
-
+# players turn
 @bot.message_handler(content_types=['text'])
 def func(message):
     if(message.text == rock or scissors or paper):
@@ -50,10 +52,9 @@ def func(message):
         bot_choice = get_bot_choice()
         result = determine_winner(user_choice, bot_choice)
         bot.send_message(message.chat.id, text=f"Ваш выбор: {user_choice}.\nВыбор компьютера: {bot_choice}.\n\n{result}!")
-
     else:
         bot.send_message(message.chat.id, text="Пожалуйста, выберите один из вариантов")
-# Handle all other messages with content_type 'text' (content_types defaults to ['text'])
+
 @bot.message_handler(func=lambda message: True)
 def echo_message(message):
     bot.reply_to(message, message.text)
