@@ -9,8 +9,6 @@ bot = telebot.TeleBot(API_TOKEN)
 rock = "🗿"
 scissors = "✂️"
 paper = "📄"
-user_choice = ""
-bot_choice = ""
 
 
 # randomize bot choice
@@ -71,4 +69,4 @@ def echo_message(message):
     bot.reply_to(message, message.text)
 
 
-bot.infinity_polling()
+bot.infinity_polling(timeout=99999, skip_pending=True)
