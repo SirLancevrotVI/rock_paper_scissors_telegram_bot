@@ -1,8 +1,7 @@
 import random
 import telebot
 from telebot import types  # для указание типов
-
-API_TOKEN = "<bot_token>"
+from dependencies import API_TOKEN
 
 bot = telebot.TeleBot(API_TOKEN)
 
@@ -23,9 +22,9 @@ def determine_winner(user_choice, bot_choice):
     if user_choice == bot_choice:
         return "Ничья"
     elif (
-        (user_choice == rock and bot_choice == scissors)
-        or (user_choice == scissors and bot_choice == paper)
-        or (user_choice == paper and bot_choice == rock)
+            (user_choice == rock and bot_choice == scissors)
+            or (user_choice == scissors and bot_choice == paper)
+            or (user_choice == paper and bot_choice == rock)
     ):
         return "Вы выиграли"
     else:
@@ -52,7 +51,7 @@ def send_welcome(message):
 # players turn
 @bot.message_handler(content_types=["text"])
 def func(message):
-    if message.text == rock or scissors or paper:
+    if message.text in [rock, paper, scissors]:
         user_choice = message.text
         bot_choice = get_bot_choice()
         result = determine_winner(user_choice, bot_choice)
